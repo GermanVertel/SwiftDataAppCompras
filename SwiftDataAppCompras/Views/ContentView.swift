@@ -6,17 +6,48 @@
 //
 
 import SwiftUI
+import SwiftData
+
 
 struct ContentView: View {
+    
+    @Query private var items: [ListModel]
+    @State private var show = false
+    
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack{
+            List{
+                Section("Activas"){
+                    ForEach(items) { item in
+                        Text(item.titulo)
+                    }
+                }
+                Section("Completadas"){
+                    
+                }
+                                
+                }
+            .navigationTitle("Mis Compras")
+            .toolbar {
+                ToolbarItem{
+                    Button {
+                        show.toggle()
+                    } label : {
+                        Image(systemName: "plus")
+                    }
+                }
+            }
+            
+            .sheet( isPresented: $show, content:{
+                NavigationStack{
+                    AddView()
+                }.presentationDetents([.medium])
+            })
+            
+            }
         }
-        .padding()
-    }
+     
 }
 
 #Preview {
