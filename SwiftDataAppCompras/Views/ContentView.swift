@@ -20,7 +20,7 @@ struct ContentView: View {
             List{
                 Section("Activas"){
                     ForEach(items) { item in
-                        Text(item.titulo)
+                        CardView(item: item)
                     }
                 }
                 Section("Completadas"){
@@ -45,11 +45,35 @@ struct ContentView: View {
                 }.presentationDetents([.medium])
             })
             
-            }
         }
-     
+    }
 }
+
+
+
+
 
 #Preview {
     ContentView()
+}
+
+
+
+struct CardView: View {
+    var item: ListModel
+    var body: some View {
+        HStack{
+            Circle()
+                .foregroundColor(item.completado ? .green : .red)
+                .frame(width: 20, height: 20)
+            VStack(alignment: .leading){
+                Text(item.titulo)
+                    .bold()
+                Text("\(item.fecha, format: Date.FormatStyle(date: .numeric, time: .shortened))")
+                    .font(.callout)
+                    .foregroundStyle(.gray)
+                    
+            }
+        }
+    }
 }
