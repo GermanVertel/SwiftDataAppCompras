@@ -20,12 +20,14 @@ struct ContentView: View {
             List{
                 Section("Activas"){
                     ForEach(items) { item in
-                        CardView(item: item)
-                        .swipeActions(edge: .leading){
-                            Button(role: .destructive){
-                                    context.delete(item)
-                            } label: {
-                                Image(systemName: "trash")
+                        NavigationLink(value: item) {
+                            CardView(item: item)
+                            .swipeActions(edge: .leading){
+                                Button(role: .destructive){
+                                        context.delete(item)
+                                } label: {
+                                    Image(systemName: "trash")
+                                }
                             }
                         }
                         
@@ -52,7 +54,12 @@ struct ContentView: View {
                     AddView()
                 }.presentationDetents([.medium])
             })
+            .navigationDestination(for: ListModel.self) {
+                ComprasView(itemList: $0)
             
+        }
+        
+        
         }
     }
 }
