@@ -15,7 +15,7 @@ struct ComprasView: View {
     
     @State private var articulo = ""
     @State private var precio = ""
-    @State private var cantidad = ""
+    @State private var cantidad = 1
     
     @FocusState private var isFocus: Bool
     
@@ -32,12 +32,13 @@ struct ComprasView: View {
                         .textFieldStyle(.roundedBorder)
                         .frame(width: 100)
                     Spacer()
-                    //contador
+                    ContadorView(contador: $cantidad)
+                        
                 }
                 
                 HStack{
                     Button{
-                        //
+                       // let art = (Float(precio) ?? 0) * Float(cantidad)
                     } label: {
                         Text("Agregar")
                     }

@@ -92,3 +92,26 @@ struct CardView: View {
         }
     }
 }
+
+struct ContadorView: View {
+    @Binding var contador: Int
+    var body: some View {
+        HStack{
+            Button{
+                contador -= 1
+                if contador <= 1{
+                    contador = 1
+                }
+            } label: {
+                Image(systemName: "minus")
+            }
+            Text("\(contador)")
+            
+            Button{
+                contador += 1
+            } label: {
+                Image(systemName: "plus")
+            }
+        }
+    }    
+}
